@@ -1,1 +1,2 @@
 # GachaRateCalc
+# GachaRateCalc
