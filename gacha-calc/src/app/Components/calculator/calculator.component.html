@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Gacha Calculator with Pity</h1>
+    <label for="pullRate">Pull Rate</label>
+    <input type="number" [(ngModel)]="pullRate" placeholder="Pull Rate" />
+    <label for="pityAmount">Pulls for Pity</label>
+    <input type="number" [(ngModel)]="pityAmount" placeholder="Pulls for Pity" />
+    <div>
+        <div class="item-row">
+            <button  [(ngModel)]="desiredPulls" (click)="toggleDesired()">{{charsOrPulls? "Total Pulls": "Character Pulls"}}</button>
+        </div>
+    </div>
+        <div class="item-row" *ngIf="!charsOrPulls" style="display: flex; flex-direction: column;">
+            <label for="pulls">Amount to Pull</label>
+            <input type="number" [(ngModel)]="pullAmount" placeholder="Amount to Pull" />
+        </div>
+        <div class="item-row" *ngIf="charsOrPulls" style="display: flex; flex-direction: column;">
+            <label for="desiredNumberOfCharacters" >Desired Number of Characters</label>
+            <input type="number" [(ngModel)]="desiredNumberOfCharacters" placeholder="Desired Number of Characters" />
+        </div>
+    <button (click)="simulatePulls()">Calculate</button>
+</div>
+<div class="container" *ngIf="pulled">
+    <div class="item-row">
+        <label for="effectivePercentage" style="margin-right: 5%;">Effective Percentage</label>
+        <h1>{{effectivePercentage}}%</h1>
+    </div>
+    <div class="item-row">
+        <label for="charsPulled" style="margin-right: 5%;">Characters Pulled</label>
+        <h1>{{charsPulled}}</h1>
+    </div>
+    <div class="item-row">
+        <label for="totalPulls" style="margin-right: 5%;">Total Pulls</label>
+        <h1>{{totalPulls}}</h1>
+    </div>
+</div>
