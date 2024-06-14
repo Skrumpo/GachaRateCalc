@@ -1,35 +1,59 @@
-<div class="container">
-    <h1>Gacha Calculator with Pity</h1>
-    <label for="pullRate">Pull Rate</label>
-    <input type="number" [(ngModel)]="pullRate" placeholder="Pull Rate" />
-    <label for="pityAmount">Pulls for Pity</label>
-    <input type="number" [(ngModel)]="pityAmount" placeholder="Pulls for Pity" />
-    <div>
-        <div class="item-row">
-            <button  [(ngModel)]="desiredPulls" (click)="toggleDesired()">{{charsOrPulls? "Total Pulls": "Character Pulls"}}</button>
-        </div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Gacha Calculator with Pity</h1>
+    <p>The formula computes the cumulative probability of pulling the character at least once over p pulls and then normalizes this probability to a per-pull rate.</p>
+        <h4>Practical Example:</h4>
+        
+            <p>For a pull rate of 0.8% and a pity limit of 120:
+                The chance of not pulling the character in one pull is 99.2% (1 - 0.8%).
+                Over 120 pulls, the chance of never pulling the character is approximately (0.992)^120.
+                Subtracting this from 1 gives the chance of pulling the character at least once in 120 pulls.
+                The effective pull rate is this probability spread over 120 pulls.</p>
+    <div class="form-group">
+      <label for="pullRate">Pull Rate (%)</label>
+      <input type="number" id="pullRate" [(ngModel)]="pullRate" class="form-control" placeholder="Pull Rate" />
     </div>
-        <div class="item-row" *ngIf="!charsOrPulls" style="display: flex; flex-direction: column;">
-            <label for="pulls">Amount to Pull</label>
-            <input type="number" [(ngModel)]="pullAmount" placeholder="Amount to Pull" />
-        </div>
-        <div class="item-row" *ngIf="charsOrPulls" style="display: flex; flex-direction: column;">
-            <label for="desiredNumberOfCharacters" >Desired Number of Characters</label>
-            <input type="number" [(ngModel)]="desiredNumberOfCharacters" placeholder="Desired Number of Characters" />
-        </div>
-    <button (click)="simulatePulls()">Calculate</button>
-</div>
-<div class="container" *ngIf="pulled">
-    <div class="item-row">
-        <label for="effectivePercentage" style="margin-right: 5%;">Effective Percentage</label>
-        <h1>{{formattedPullPercentage}}%</h1>
+    <div class="form-group">
+      <label for="pityAmount">Pulls for Pity</label>
+      <input type="number" id="pityAmount" [(ngModel)]="pityAmount" class="form-control" placeholder="Pulls for Pity" />
     </div>
-    <div class="item-row">
-        <label for="charsPulled" style="margin-right: 5%;">Characters Pulled</label>
-        <h1>{{charsPulled}}</h1>
+    
+    <div class="text-center my-3">
+      <button class="btn btn-primary" (click)="toggleDesired()">
+        {{charsOrPulls ? "Total Pulls" : "Character Pulls"}}
+      </button>
     </div>
-    <div class="item-row">
-        <label for="totalPulls" style="margin-right: 5%;">Total Pulls</label>
-        <h1>{{totalPulls}}</h1>
+  
+    <div *ngIf="!charsOrPulls" class="form-group">
+      <label for="pullAmount">Amount to Pull</label>
+      <input type="number" id="pullAmount" [(ngModel)]="pullAmount" class="form-control" placeholder="Amount to Pull" />
     </div>
-</div>
+    
+    <div *ngIf="charsOrPulls" class="form-group">
+      <label for="desiredNumberOfCharacters">Desired Number of Characters</label>
+      <input type="number" id="desiredNumberOfCharacters" [(ngModel)]="desiredNumberOfCharacters" class="form-control" placeholder="Desired Number of Characters" />
+    </div>
+    
+    <div class="text-center my-3">
+      <button class="btn btn-success" (click)="simulatePulls()">Calculate</button>
+    </div>
+  
+    <div class="results container mt-4" *ngIf="pulled">
+      <div class="form-group text-center">
+        <label for="effectivePercentage">Effective Percentage</label>
+        <h2 id="effectivePercentage">{{formattedPullPercentage}}%</h2>
+      </div>
+      <div class="form-group text-center">
+        <label for="effectivePullRate">Actual Pull Rate</label>
+        <h2 id="effectivePullRate">{{formattedEffectivePullRate}}%</h2>
+      </div>
+      <div class="form-group text-center">
+        <label for="charsPulled">Characters Pulled</label>
+        <h2 id="charsPulled">{{charsPulled}}</h2>
+      </div>
+      <div class="form-group text-center">
+        <label for="totalPulls">Total Pulls</label>
+        <h2 id="totalPulls">{{totalPulls}}</h2>
+      </div>
+    </div>
+  </div>
+  

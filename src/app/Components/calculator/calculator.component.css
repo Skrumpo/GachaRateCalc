@@ -21,3 +21,31 @@ input {
     align-items: center;
     margin: 10px;
 }
+
+.container {
+    max-width: 600px;
+  }
+  .btn {
+    width: 100%;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-group.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-group.text-center label {
+    margin-bottom: 0.5rem;
+  }
+  .results h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  .results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

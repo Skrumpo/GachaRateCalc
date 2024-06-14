@@ -24,6 +24,8 @@ export class CalculatorComponent {
   effectivePercentage: number = 0;
   pullPercentage: number = 0;
   formattedPullPercentage: string = "0.00";
+  effectivePullRate: number = 0;
+  formattedEffectivePullRate: string = "0.00";
 
   toggleDesired() {
     this.charsOrPulls = !this.charsOrPulls;
@@ -36,13 +38,13 @@ export class CalculatorComponent {
 
     for (let i = 0; this.charsOrPulls ? this.charsPulled < this.desiredNumberOfCharacters : i < this.pullAmount; i++) {
         this.totalPulls++;
-        let rng = Math.floor(Math.random() * 100) + 1;
+        let rng = Math.floor(Math.random() * 1000) + 1;
 
         if (pullsUntilPity === 1) {
             this.charsPulled++;
             this.timesMaxPity++;
             pullsUntilPity = this.pityAmount;
-        } else if (rng <= this.pullRate) {
+        } else if (rng <= this.pullRate * 10) {
             this.charsPulled++;
             pullsUntilPity = this.pityAmount;
         } else {
@@ -50,6 +52,8 @@ export class CalculatorComponent {
         }
     }
     // Update effectivePercentage after simulating pulls
+    this.effectivePullRate = this.charsPulled / this.totalPulls;
+    this.formattedEffectivePullRate = (this.effectivePullRate * 100).toFixed(2);
     this.calcRate();
     this.pulled = true;
 }
