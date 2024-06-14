@@ -32,6 +32,7 @@ export class CalculatorComponent {
     this.totalPulls = 0;
     this.timesMaxPity = 0;
     let pullsUntilPity = this.pityAmount;
+    this.results = [];
 
     for (let i = 0; this.charsOrPulls ? this.charsPulled < this.desiredNumberOfCharacters : i < this.pullAmount; i++) {
         this.totalPulls++;
