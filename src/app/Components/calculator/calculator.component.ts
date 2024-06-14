@@ -14,18 +14,14 @@ export class CalculatorComponent {
   charsPulled: number = 0;
   timesMaxPity: number = 0;
   totalPulls: number = 0;
-  freeAmountPullableInOneDay: number = 21;
-  costPerPull: number = 1;
-  eventLength: number = 21;
   desiredNumberOfCharacters: number = 1;
-  desiredCharacters: boolean = false;
-  desiredPulls: boolean = false;
   charsOrPulls: boolean = true;
   effectivePercentage: number = 0;
   pullPercentage: number = 0;
   formattedPullPercentage: string = "0.00";
   effectivePullRate: number = 0;
   formattedEffectivePullRate: string = "0.00";
+  results: string[] = [];
 
   toggleDesired() {
     this.charsOrPulls = !this.charsOrPulls;
@@ -34,6 +30,7 @@ export class CalculatorComponent {
   simulatePulls() {
     this.charsPulled = 0;
     this.totalPulls = 0;
+    this.timesMaxPity = 0;
     let pullsUntilPity = this.pityAmount;
 
     for (let i = 0; this.charsOrPulls ? this.charsPulled < this.desiredNumberOfCharacters : i < this.pullAmount; i++) {
@@ -44,8 +41,10 @@ export class CalculatorComponent {
             this.charsPulled++;
             this.timesMaxPity++;
             pullsUntilPity = this.pityAmount;
+            this.results.push("Pity pull. Total pulls so far: "+this.totalPulls);
         } else if (rng <= this.pullRate * 10) {
             this.charsPulled++;
+            this.results.push("Character pull at " + (this.pityAmount - pullsUntilPity)+"/"+this.pityAmount+" pity. Total pulls so far: "+this.totalPulls);
             pullsUntilPity = this.pityAmount;
         } else {
             pullsUntilPity--;

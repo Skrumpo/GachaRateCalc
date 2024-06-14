@@ -1,3 +1,4 @@
+<div style="display: flex; flex-direction: row; justify-content: space-evenly;">
 <div class="container mt-5">
     <h1 class="text-center mb-4">Gacha Calculator with Pity</h1>
     <p>The formula computes the cumulative probability of pulling the character at least once over p pulls and then normalizes this probability to a per-pull rate.</p>
@@ -37,23 +38,35 @@
       <button class="btn btn-success" (click)="simulatePulls()">Calculate</button>
     </div>
   
-    <div class="results container mt-4" *ngIf="pulled">
-      <div class="form-group text-center">
+    <div class="results container mt-4" style="display: flex; flex-direction: row;" *ngIf="pulled">
+      <div class="form-group text-center" style="margin-right: 5%;">
         <label for="effectivePercentage">Effective Percentage</label>
         <h2 id="effectivePercentage">{{formattedPullPercentage}}%</h2>
       </div>
-      <div class="form-group text-center">
+      <div class="form-group text-center" style="margin-right: 5%;">
         <label for="effectivePullRate">Actual Pull Rate</label>
         <h2 id="effectivePullRate">{{formattedEffectivePullRate}}%</h2>
       </div>
-      <div class="form-group text-center">
+      <div class="form-group text-center" style="margin-right: 5%;">
+        <label for="timesMaxPity">Times Max Pity was hit:</label>
+        <h2 id="charsPulled">{{timesMaxPity}}</h2>
+      </div>
+      <div class="form-group text-center" style="margin-right: 5%;">
         <label for="charsPulled">Characters Pulled</label>
         <h2 id="charsPulled">{{charsPulled}}</h2>
       </div>
-      <div class="form-group text-center">
+      <div class="form-group text-center" style="margin-right: 5%;">
         <label for="totalPulls">Total Pulls</label>
         <h2 id="totalPulls">{{totalPulls}}</h2>
       </div>
     </div>
-  </div>
-  
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; height: 60vh; width: 40vw; overflow-y:auto;">
+    <h1>Pull Results: </h1>
+    <div *ngFor="let result of results" class="container mt-4">
+      <div class="form-group
+        text-center">
+            <p>{{result}}</p>
+      </div>
+    </div>
+    </div>
