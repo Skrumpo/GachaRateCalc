@@ -93,9 +93,13 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/GachaRateCalc/",
+            "repo": "https://github.com/Skrumpo/GachaRateCalc.git"
         }
       }
     }
   }
+}
 }
